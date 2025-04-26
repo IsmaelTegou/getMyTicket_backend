@@ -1,6 +1,5 @@
 package GLO4.getMyTicket_Backend.dto;
 
-import GLO4.getMyTicket_Backend.model.Agence;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
@@ -18,13 +17,9 @@ public class TrajetRequestDTO {
     @NotNull
     private Double price;
 
-    @NotBlank
-    private String startAgenceName;
+    @NotNull
+    private Long idStartAgence;
 
-    @NotBlank
-    private Agence startAgence;
-
-    @NotBlank
-    private Agence endAgence;
-
+    @NotNull
+    private Long idEndAgence;
 }

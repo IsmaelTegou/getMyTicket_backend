@@ -14,6 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TrajetServiceImpl implements TrajetService {
     private final TrajetRepository trajetRepository;
+    private final AgenceService agenceService;
 
     @Override
     public TrajetResponseDTO createTrajet(TrajetRequestDTO trajetRequestDTO) {
@@ -21,8 +22,8 @@ public class TrajetServiceImpl implements TrajetService {
                 .id(trajetRequestDTO.getId())
                 .name(trajetRequestDTO.getName())
                 .price(trajetRequestDTO.getPrice())
-                .startAgence(trajetRequestDTO.getStartAgence())
-                .endAgence(trajetRequestDTO.getEndAgence())
+                .startAgence(agenceService.getAgenceById(trajetRequestDTO.getIdStartAgence()))
+                .endAgence(agenceService.getAgenceById(trajetRequestDTO.getIdEndAgence()))
                 .build();
         trajetRepository.save(trajet);
 
@@ -55,8 +56,8 @@ public class TrajetServiceImpl implements TrajetService {
         Trajet trajet = findTrajetById(id);
         trajet.setName(trajetRequestDTO.getName());
         trajet.setPrice(trajetRequestDTO.getPrice());
-        trajet.setStartAgence(trajetRequestDTO.getStartAgence());
-        trajet.setEndAgence(trajetRequestDTO.getEndAgence());
+        trajet.setStartAgence(agenceService.getAgenceById(trajetRequestDTO.getIdStartAgence()));
+        trajet.setEndAgence(agenceService.getAgenceById(trajetRequestDTO.getIdEndAgence()));
 
         trajetRepository.save(trajet);
 
